@@ -1,0 +1,22 @@
+cmake_minimum_required(VERSION 3.28)
+project(Minesweeper LANGUAGES CXX)
+
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+
+include(FetchContent)
+FetchContent_Declare(SFML
+        GIT_REPOSITORY https://github.com/SFML/SFML.git
+        GIT_TAG 3.0.2
+        GIT_SHALLOW ON
+        EXCLUDE_FROM_ALL
+        SYSTEM)
+FetchContent_MakeAvailable(SFML)
+
+add_executable(Minesweeper main.cpp
+        Leaderboard.h
+        GameScreen.h
+        GameScreen.cpp
+        Leaderboard.cpp
+)
+target_compile_features(Minesweeper PRIVATE cxx_std_17)
+target_link_libraries(Minesweeper PRIVATE SFML::Graphics)
